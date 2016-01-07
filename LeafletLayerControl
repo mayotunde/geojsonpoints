@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Leaflet Layer Control</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+</head>
+<body style="background:grey">
+<div id="map" style="width: 600px;height: 500px"></div>
+
+<script>
+
+var points = new L.LayerGroup();
+L.circleMarker([9.00,7.00]).bindPopup("<strong><em style='color:red;'>Red labelled marker</strong></em>").addTo(points),
+L.circleMarker([6.00,7.00]).bindPopup("<h4><em style='color:bakground;yellow'>Name: Point<br>Salinity is very high here</h4></em>").addTo(points),
+L.circleMarker([10.00,6.00]).bindPopup("<h4 style='padding: 20px;background:yellow; border 2px black;'>Title</h4>").addTo(points),
+L.circleMarker([6.00,5.00]).bindPopup("<img src='image.jpg' width=80, height=80/><br>Picture in popup").addTo(points),
+L.circleMarker([3.50,7.50]).bindPopup("Source: <a href='http://mapsnigeriainitiative.wordpress.com'>mapsnigeriainitiative</a>").addTo(points);
+
+var mapLink = 'map data &copy;<a href="http://openstreetmap.org">openstreetmap</a>,'+
+		 '<a href="http://mapsnigeriainitiative.wordpress.com">mapsnigeriainitiative</a>';
+
+var base = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: mapLink}),
+	Toner = L.tileLayer('http://tile.Stamen.com/toner/{z}/{x}/{y}.png', {attribution: mapLink});
+
+var map = L.map('map', {center:[10, 3.28], zoom: 4, layers: [base, points]});
+
+var basemap = {"basemap": base, "Toner": Toner};
+var overlay = {"points": points};
+
+L.control.layers(basemap, overlay).addTo(map);
+       
+</script></body></html>
+
+
+
+
