@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>custom markers for esri feature layer</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js"></script>
+
+ 
+  <script src="https://cdn.jsdelivr.net/leaflet.esri/1.0.0/esri-leaflet.js"></script>
+
+  </head>
+<body>
+
+<div id="map" style='width:700px;height:500px'></div>
+
+<script>
+  var map = L.map('map').setView([7.50, 3.75], 8);
+
+  var icons = 
+  L.icon({
+      iconUrl: 'https://lh3.googleusercontent.com/H9lcKvYAUOrqhmcOuUlB-hJeOIRhx_AbKjdKYB-WiHZjSbRpL7koesAppXnfe8GeKs8SNlVgC4rH9LiySbnr_WlYc6ho_C41m_e5lK8uqDcKZmN1VLUgTvmoviwqrv4_yQicCkwiVozdm7YChFa8dKQcZPhFHcHErnTo0X7yS8Ye_E7OS5R0RkCQbojZlyZ8MngnHSDcyYxFo6E6aAVnfdOStDpFCHi-lhmatdQ0MrShHwGJd_wwLq5E0ddNrjWW7MhWfkA1Olps8oEBr5CFMn8XzYJS4AutRORzb1CA9kinQQ_hBEtfsr0LJNl87bRbqhHhh32Ty8pXyjPRLYj7U9Mif81xWC_IVuVuHdUvX20Z4hqpDKGvcRvx3n8RKbQ1brJYASZOGQY9sKyW61C79B9M58LRrusQnwg4VSfNJwYbpMm-VyWx2y0zN6oKjivVpr6U5i7PcuOR7WdBKOBbNb5g4P_GUtBRbbCT-JWg_WaIGLjU5kbPGIlDNEzachpdjZAbwsj8v1Cp5CpXdrJB01G3kGIpeHt2Y43AiMuj4rc=w119-h109-no',
+      iconSize: [20, 20],
+      iconAnchor: [13.5, 17.5],
+      popupAnchor: [0, -11],
+    });   
+  
+  L.esri.basemapLayer('Topographic').addTo(map);
+  L.esri.featureLayer({
+    url: 'https://services6.arcgis.com/c9vYYUT5fnie2Ui6/arcgis/rest/services/Schools/FeatureServer/0',
+    pointToLayer: function (geojson, latlng) {
+      return L.marker(latlng, {
+        icon: icons})
+       }}).addTo(map);
+</script>
+<div id='logo' style='position:absolute;bottom:100px;left:20px;float:right';>
+<img src="file:///C:/Users/user/Desktop/New folder/logo2.png" width=50px height=50px /><br>
+<small><a href="http://mapsnigeriainitiative.wordpress.com">mapsNI</a><small>
+</div>
+</body>
+</html>
+
