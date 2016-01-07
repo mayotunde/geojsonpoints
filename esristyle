@@ -13,7 +13,7 @@
  </head>
 <body>
 
-<div id="map" style='width: 1000px;height: 1000px'></div>
+<div id="map" style='width: 700px;height: 500px'></div>
 
 <script>
 var attr =' map data &copy;<a href="http://mapsnigeriainitiative.wordpress.com">mapsnigeriainitiative</a>';
