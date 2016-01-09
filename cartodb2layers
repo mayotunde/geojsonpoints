@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Overlaying two layers from CartoDB API</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+       
+  </head>
+  <body>
+    <div id="map" style='width:600px;height:400px'></div>
+  
+    
+       <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <script>
+
+function main () {
+      var  map = new L.map('map', {
+          zoomControl: true,
+          center: [7, 3],
+          zoom: 3
+        });
+var attr = '<a href="http://mapsnigeriainitiative.wordpress.com">MapsNI</a>,'+'<a href="http://mapbox.com">tiles by mapbox</a>';
+   L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_map/MapServer/tile/{z}/{y}/{x}.png', {
+          attribution: attr
+        }).addTo(map);
+      
+		 var url1 = 'https://mayotunde.cartodb.com/api/v2/viz/cbb7fd66-7a70-11e5-98ab-0e5db1731f59/viz.json';
+	var url2 = 'https://mayotunde.cartodb.com/api/v2/viz/f3d905dc-74f9-11e5-b9aa-0e674067d321/viz.json';
+           cartodb.createLayer(map, url2)
+            .addTo(map) 
+            .done(function (layer) {
+              cartodb.createLayer(map, url1)
+                .addTo(map) 
+                .done(function (layer) {
+                                  })
+                .error(function (){
+                                    });
+            })
+            .error(function () {
+                           });
+
+      }
+      window.onload = main;
+    </script>
+  </body>
+</html>
