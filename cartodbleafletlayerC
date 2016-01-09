@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet control example and CartoDB layers</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+  
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+</head>
+<body>
+  <div id="map" style='width:700px;height:500px'></div>
+
+  <!-- include cartodb.js library -->
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+  <script>
+    function main() {
+      var map = new L.Map('map', {
+               center: [6.4632778, 3.3657778],
+        zoom: 12
+      });
+mapLink = '<a href="http://openstreetmap.org">openstreetmap</a>,'+'<a href="http://mapsnigeriainitiative.wordpress.com">mapsNI</a>';
+ var base = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: ' &copy; ' + mapLink});
+
+      var layer1;
+      var layer2;
+
+      cartodb.createLayer(map, 'https://mayotunde.cartodb.com/api/v2/viz/6c558540-a073-11e5-bdb5-0ef24382571b/viz.json')
+      .done(function(layer)
+      {
+        layer1 = layer;
+
+        cartodb.createLayer(map, 'https://mayotunde.cartodb.com/api/v2/viz/fae28238-a07b-11e5-8663-0ecfd53eb7d3/viz.json')
+        .done(function(layer)
+        {
+          layer2 = layer;
+
+var basemaps = {'base': base};
+          
+          var overlayMaps = {
+            "Layer1": layer1,
+            "Layer2": layer2
+          };
+          L.control.layers(basemaps, overlayMaps).addTo(map);
+        });
+      });
+
+      }
+
+     
+      window.onload = main;
+    </script>
+  </body>
+  </html>
