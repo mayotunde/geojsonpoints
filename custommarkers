@@ -29,7 +29,7 @@
   
   L.esri.basemapLayer('Topographic').addTo(map);
   L.esri.featureLayer({
-    url: 'https://services6.arcgis.com/c9vYYUT5fnie2Ui6/arcgis/rest/services/Schools/FeatureServer/0',
+    url: 'http://services6.arcgis.com/CMCzxlg4P1PQtqfK/arcgis/rest/services/cities/FeatureServer/0',
     pointToLayer: function (geojson, latlng) {
       return L.marker(latlng, {
         icon: icons})
