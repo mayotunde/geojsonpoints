@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Styling for Esri FeatureLayer</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css" />
+  <script src="http://cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js"></script>
+
+
+  <script src="http://cdn.jsdelivr.net/leaflet.esri/1.0.0/esri-leaflet.js"></script>
+
+ </head>
+<body>
+
+<div id="map" style='width: 700px;height: 500px'></div>
+
+<script>
+var attr =' map data &copy;<a href="http://mapsnigeriainitiative.wordpress.com">mapsnigeriainitiative</a>';
+
+  var map = L.map('map').setView([4.6, 2.85], 5);
+  L.esri.basemapLayer('Streets', {attribution: attr}).addTo(map);
+
+var style = {fillColor: '#f45', fillOpacity: 0.5, color: 'white'};
+  var Cities = L.esri.featureLayer({
+    url: 'http://services6.arcgis.com/c9vYYUT5fnie2Ui6/arcgis/rest/services/Africa_populated_Cities/FeatureServer/0',
+pointToLayer: function (feature, latlng) {
+  marker = L.circleMarker(latlng, style)
+      return marker;
+       }}).addTo(map);
+   
+  
+Cities.bindPopup(function (feature) {
+    return L.Util.template('<p>{address}<br>{country}<br>{city_popul}</p>', feature.properties);
+  });
+</script>
+
+<div id='logo' style='position:absolute;bottom:80px;left:20px;float:right';>
+<img src="https://lh3.googleusercontent.com/jY9fWF3HjY1NPeluF6LQDyDRL2zqGevA_IW0jKu5Z6GqsiSw6mHE_oCNDvGV_PnL_G6JFZKzZDHNqSHd6wS9F12GHCGpPiDU2yF2RK3ELBYotYSNMPOVUnyyobGCGKDA1Rc3Xga6vaxbx0MN3YR2WVvwW6avdpXMUZdZNAtBVPlV0famTCd-dXeHDmr53KNPQQNWLLM5Wgp3rUYvxbINhvTCnMlaUeHrp0Hab5BJaTB6SbabPpnPNPT1X3uvz6nQs3PgSbbG2pevw4Yn91DQI_kTuIcf7fmS39MdOm2LSFpB0wHgEvvlloLJfpXw0TvGjBpgZFeA8pIdmeoAr6q4aonVVkydr3WMN8v6DJ2DzFcfgYUHalxrDPoJTiZoh0U-qNTeUxc-kpXca8xlmO2EpZg4_SFbdZUU6ZNgQBiJoP99IwZ03Qzvp_0bdEbmigdzY8RLwP5riKHgotnXY4E71qS8yzlD8JvK4bK5ojBzvZvXlnfXDo0y82a8LJCHqjxbK3RbKDYZybb72d31gc-bpx6m1sKT24RnHZp2hq9FVbs=w80-h50-no" /><br>
+<small><a href="http://mapsnigeriainitiative.wordpress.com">mapsNI</a><small>
+</div>
+
+</body>
+</html>
