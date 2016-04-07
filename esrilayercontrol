@@ -21,7 +21,7 @@ var base =  L.esri.basemapLayer('Streets', {attribution: attr});
 topo = L.esri.basemapLayer('Topographic', {attribution: attr});
 
   var Cities = L.esri.featureLayer({
-    url: 'http://services6.arcgis.com/c9vYYUT5fnie2Ui6/arcgis/rest/services/Africa_populated_Cities/FeatureServer/0'
+    url: 'http://services6.arcgis.com/CMCzxlg4P1PQtqfK/arcgis/rest/services/cities/FeatureServer/0'
    });
 
 Cities.bindPopup(function (feature) {
