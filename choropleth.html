@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Leaflet Map</title>
+    <meta charset="utf-8" />
+    <link 
+        rel="stylesheet" 
+        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
+    />
+</head>
+<body>
+    <div id="map" style="width: 800px; height: 500px"></div>
+
+    <script
+        src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
+    </script>
+
+    <script>
+        var map = L.map('map').setView([7, 6.850], 8);
+        mapLink = 
+            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; ' + mapLink + ' mapsnigeriainitiative',
+            maxZoom: 18,
+            }).addTo(map);
+
+function onEachFeature(feature, layer) {
+// does this feature have a property named popupContent?
+if (feature.properties && feature.properties.voterper1000) {
+        layer.bindPopup(feature.properties.voterper1000);
+    }
+}
+
+var spaces = [{
+"type":"Feature",
+"properties":{
+"district":"one",
+"voterper1000":"25"
+},
+"geometry":{"type":"Polygon",
+"coordinates":[[
+[6.465492207031378,6.364136030273498],
+[7.115725460937613,6.839916459960986],
+[7.34172116503917,6.364136030273498],
+[6.941272636718867,6.050913914062567],
+[6.465492207031378,6.364136030273498]
+]]
+}
+},{
+	"type":"Feature",
+	"properties":{
+	"district":"two",
+	"voterper1000": "10"
+	},
+	"geometry":{
+	"type":"Polygon",
+	"coordinates":[[
+	[7.337756328125108,6.36810086718756],
+	[7.821466431640721,6.098491957031317],
+	[7.313967306640733,5.52755544140633],
+	[7.313967306640733,5.52755544140633],
+	[7.024534211914178,5.559274136718829],
+	[7.000745190429803,5.765445656250074],
+	[6.937307799804804,6.050913914062567],
+	[7.337756328125108,6.36810086718756]
+	]]
+	}
+	},{
+	"type":"Feature",
+	"properties":{
+	"district":"three",
+	"voterper1000":"22"
+	},
+	"geometry":{
+	"type":"Polygon",
+	"coordinates":[[
+	[6.937307799804804,6.050913914062567],
+	[6.437738348632941,5.797164351562573],
+	[6.033324983398575,6.094527120117254],
+	[6.251391013672007,6.514799833007869],
+	[6.937307799804804,6.050913914062567]
+	]]
+	}
+	},{
+	"type":"Feature",
+	"properties":{
+	"district":"four",
+	"voterper1000":"6"
+	},
+	"geometry":{
+	"type":"Polygon",
+	"coordinates":[[
+	[7.813536757812597,6.094527120117254],
+	[7.337756328125108,6.364136030273498],
+	[7.821466431640721,6.61392075585943],
+	[8.003848929687592,6.69718233105474],
+	[8.29724686132821,6.649604288085991],
+	[8.582715119140705,6.181753532226627],
+	[7.813536757812597,6.094527120117254]
+	]]
+	}
+	},{
+	"type":"Feature",
+	"properties":{
+	"district":"five",
+	"voterper1000": "17"
+	},
+	"geometry":{
+	"type":"Polygon",
+	"coordinates":[[
+	[7.111760624023551,6.843881296875049],
+	[6.46945704394544,6.356206356445373],
+	[6.382230631836068,6.645639451171928],
+	[6.394125142578254,6.855775807617237],
+	[6.520999923828251,7.022298958007857],
+	[6.81439785546887,7.069877000976606],
+	[7.111760624023551,6.843881296875049]
+	]]
+	}
+	},{
+	"type":"Feature",
+	"properties":{
+	"district":"six",
+	"voterper1000": "14"
+},
+"geometry":{
+"type":"Polygon",
+"coordinates":[[
+[7.313967306640733,5.52755544140633],
+[7.817501594726659,6.098491957031317],
+[8.574785445312578,6.185718369140689],
+[8.7413085957032,5.824918209961011],
+[8.376543599609459,5.741656634765699],
+[8.03160278808603,5.404645497070395],
+[7.6866619765626,5.341208106445397],
+[7.313967306640733,5.52755544140633]
+]]
+}
+}];
+
+function getColor(p) {
+return 	   p > 20 ? '#ea7' :
+           p > 15  ? '#FEB24C' :
+           p > 5  ? '#FED976' :
+          	    '#FFEDA0';
+}
+
+function style(feature) {
+return {
+        fillColor: getColor(feature.properties.voterper1000),
+        weight:2,
+        opacity: 1,
+        color:'white',
+        dashArray:'3',
+        fillOpacity: 0.7
+    };
+}
+
+
+L.geoJson(spaces, {
+style:style,
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+    </script>
+    <div id='logo' style='position:absolute;bottom:80px;left:20px;float:right';>
+<img src="https://lh3.googleusercontent.com/jY9fWF3HjY1NPeluF6LQDyDRL2zqGevA_IW0jKu5Z6GqsiSw6mHE_oCNDvGV_PnL_G6JFZKzZDHNqSHd6wS9F12GHCGpPiDU2yF2RK3ELBYotYSNMPOVUnyyobGCGKDA1Rc3Xga6vaxbx0MN3YR2WVvwW6avdpXMUZdZNAtBVPlV0famTCd-dXeHDmr53KNPQQNWLLM5Wgp3rUYvxbINhvTCnMlaUeHrp0Hab5BJaTB6SbabPpnPNPT1X3uvz6nQs3PgSbbG2pevw4Yn91DQI_kTuIcf7fmS39MdOm2LSFpB0wHgEvvlloLJfpXw0TvGjBpgZFeA8pIdmeoAr6q4aonVVkydr3WMN8v6DJ2DzFcfgYUHalxrDPoJTiZoh0U-qNTeUxc-kpXca8xlmO2EpZg4_SFbdZUU6ZNgQBiJoP99IwZ03Qzvp_0bdEbmigdzY8RLwP5riKHgotnXY4E71qS8yzlD8JvK4bK5ojBzvZvXlnfXDo0y82a8LJCHqjxbK3RbKDYZybb72d31gc-bpx6m1sKT24RnHZp2hq9FVbs=w80-h50-no" /><br>
+<small><a href="http://mapsnigeriainitiative.wordpress.com">mapsNI</a><small>
+</div>
+</body>
+</html>
